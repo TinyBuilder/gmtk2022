@@ -31,13 +31,15 @@ func _ready():
 		for y in range(board_height) :
 			board_state[x].append(0) 
 			tilemap.set_cellv(Vector2(x,y), 0)
+
+	OS.window_size = Vector2(board_height * 64, board_width * 64)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var cursor_position = get_local_mouse_position()
 	var cell = tilemap.world_to_map(tilemap.to_local(cursor_position))
-	highlight.global_position = tilemap.map_to_world(cell + Vector2(-1,1))	
+	highlight.global_position = tilemap.map_to_world(cell)	
 	#print("Cursor at: ", cursor_position)
 	
 	
