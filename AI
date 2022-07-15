@@ -1,0 +1,21 @@
+Blobfish AI V2
+
+Scoring:
+
+Squares that are next to an unowned castle in a cardinal position are worth 3 points, 
+squares that are two square out are worth 2 points, 
+squares that are three squares out are worth 1 point. 
+Squares that are within 1 square of a player's previously placed square are worth one point.
+
+AI Program
+
+Roll the two dice and do the following for each die:
+
+For each blank square, simulate drawing a line in each cardinal direction and calculate the total score for each cardinal direction and take a note of the highest scoring direction for that square.
+When done for all blank squares, take note of the overall highest scoring square + direction. In the case of a tie randomly choose one.
+
+Compare the highest score for both die and choose the highest scoring one. In case of a tie, randomly choose one.
+
+Draw this line and randomly choose and draw the others coming off of it.
+
+In the event of no possible squares remaining, the game ends prematurely.
