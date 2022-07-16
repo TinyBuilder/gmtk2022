@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Castles.png-8560f5a224b159c3b3416cdbf78b83df.stex"
+path="res://.import/Board_tile_set_Barrier.png-85203a1b02667f6055541a2310ba5b43.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/32x32/Castles.png"
-dest_files=[ "res://.import/Castles.png-8560f5a224b159c3b3416cdbf78b83df.stex" ]
+source_file="res://assets/32x32/Board_tile_set_Barrier.png"
+dest_files=[ "res://.import/Board_tile_set_Barrier.png-85203a1b02667f6055541a2310ba5b43.stex" ]
 
 [params]
 

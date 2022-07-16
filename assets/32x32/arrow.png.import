@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Castles.png-8560f5a224b159c3b3416cdbf78b83df.stex"
+path="res://.import/arrow.png-43621ef9127ac2aac577ad03cce54c24.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/32x32/Castles.png"
-dest_files=[ "res://.import/Castles.png-8560f5a224b159c3b3416cdbf78b83df.stex" ]
+source_file="res://assets/32x32/arrow.png"
+dest_files=[ "res://.import/arrow.png-43621ef9127ac2aac577ad03cce54c24.stex" ]
 
 [params]
 

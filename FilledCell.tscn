@@ -145,6 +145,11 @@ animations = [ {
 "loop": false,
 "name": "red",
 "speed": 13.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "blank",
+"speed": 5.0
 } ]
 
 [node name="FilledCell" type="Node2D"]
@@ -155,5 +160,4 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 16, 16 )
 frames = SubResource( 27 )
-animation = "red"
-frame = 12
+animation = "blank"
