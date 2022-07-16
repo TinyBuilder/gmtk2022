@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/32x32/Board_tile_set.png" type="Texture" id=1]
 [ext_resource path="res://Field.gd" type="Script" id=2]
+[ext_resource path="res://DiceRoller.tscn" type="PackedScene" id=3]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Board_tile_set.png 0"
@@ -43,4 +44,9 @@ polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [node name="RollTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="DiceRoller" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 512, 300 )
+
 [connection signal="timeout" from="RollTimer" to="." method="_on_RollTimer_timeout"]
+[connection signal="hide" from="DiceRoller" to="." method="_on_DiceRoller_hide"]

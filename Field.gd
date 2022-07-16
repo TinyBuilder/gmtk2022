@@ -19,16 +19,10 @@ var Dice = preload("res://Dice.tscn")
 var Castle = preload("res://Castle.tscn")
 var castles = []
 
-func dice_roll(position) :
+func dice_roll() :
 	is_rolling = true
-	var dice = Dice.instance()
-	rolling_dice.append(dice)
-	add_child(dice)
-	var dice_value = Global.rng.randi_range(1, 6)	
-	dice.global_position = position 
-	dice.roll(dice_value)
-	$RollTimer.start()
-	return dice_value
+	$DiceRoller.show()	
+	$DiceRoller.roll()
 
 func make_move(cell, dice):
 	dice.global_position = $TileMap.map_to_world(cell)
@@ -37,7 +31,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		# var pos = event.position
 		# var cell = $TileMap.world_to_map($TileMap.to_local(pos))
-		if event.pressed :
+		if event.pressed and not is_rolling:
 			print("click")
 			dice_roll()
 			# $TileMap.set_cellv(cell, 1)
@@ -70,9 +64,6 @@ func _ready():
 	#OS.window_size = Vector2(board_height * 64, board_width * 64)
 	screen_center = OS.window_size / 2
 
-
-	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var cursor_position = get_local_mouse_position()
@@ -81,4 +72,15 @@ func _process(_delta):
 	#print("Cursor at: ", cursor_position)
 	
 func _on_RollTimer_timeout():
+	is_rolling = false
+
+
+func _on_DiceRoller_hide():
+	print("Selected dice: ", $DiceRoller.result)
+	if turn == 1:
+		player_dice = $DiceRoller.result
+	
+	if turn == 2:
+		opponent_dice = $DiceRoller.result
+
 	is_rolling = false

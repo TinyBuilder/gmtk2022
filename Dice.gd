@@ -8,11 +8,12 @@ var result = 0
 var roll_progress = 0
 var last_result = 0
 var fast_roll = 1/30
-onready var timer = $Timer
 onready var sprite = $AnimatedSprite
 
+signal done
+
 func roll(determined_result) :
-	print("rolling")
+	# print("rolling")
 	roll_progress = 1
 	result = determined_result
 
@@ -51,3 +52,4 @@ func _process(_delta):
 	if roll_progress > 60:
 		roll_progress = 0
 		sprite.frame = result - 1
+		emit_signal("done")
