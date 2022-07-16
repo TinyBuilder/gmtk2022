@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/craps-36560.mp3-0a2e630e95c6b9648f01e3f075f655da.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/craps-36560.mp3"
+dest_files=[ "res://.import/craps-36560.mp3-0a2e630e95c6b9648f01e3f075f655da.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gamemisc_dice-roll-on-wood_jaku5-37414.mp3-b123929b42b9148859673c73ff2f3093.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/gamemisc_dice-roll-on-wood_jaku5-37414.mp3"
+dest_files=[ "res://.import/gamemisc_dice-roll-on-wood_jaku5-37414.mp3-b123929b42b9148859673c73ff2f3093.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

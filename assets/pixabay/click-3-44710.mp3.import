@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/click-3-44710.mp3-e5f47fc0fb573b168a7d5bc93bcc9f0c.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/click-3-44710.mp3"
+dest_files=[ "res://.import/click-3-44710.mp3-e5f47fc0fb573b168a7d5bc93bcc9f0c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

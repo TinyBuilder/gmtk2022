@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/scribble-6144.mp3-e75cfeb616c437dca8f46f0270260bd3.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/scribble-6144.mp3"
+dest_files=[ "res://.import/scribble-6144.mp3-e75cfeb616c437dca8f46f0270260bd3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

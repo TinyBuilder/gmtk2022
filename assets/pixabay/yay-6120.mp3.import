@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/yay-6120.mp3-661a0334345e3c974519069c195f385a.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/yay-6120.mp3"
+dest_files=[ "res://.import/yay-6120.mp3-661a0334345e3c974519069c195f385a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

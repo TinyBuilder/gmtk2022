@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/medieval-fanfare-6826.mp3-cbf033af5113a4e1fe48747444ca45ea.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/medieval-fanfare-6826.mp3"
+dest_files=[ "res://.import/medieval-fanfare-6826.mp3-cbf033af5113a4e1fe48747444ca45ea.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

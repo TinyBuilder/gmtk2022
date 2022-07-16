@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dice_rolls_15cm-31708.mp3-1bc727d1317bdcedcb92a80e5d2ce969.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/dice_rolls_15cm-31708.mp3"
+dest_files=[ "res://.import/dice_rolls_15cm-31708.mp3-1bc727d1317bdcedcb92a80e5d2ce969.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

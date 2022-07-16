@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Dice.tscn" type="PackedScene" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 64 )
+
+[node name="DiceRoller" type="Node2D"]
+
+[node name="Dice2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 0 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="DiceContainer1" type="Area2D" parent="."]
+position = Vector2( -128, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DiceContainer1"]
+shape = SubResource( 1 )
+
+[node name="Dice1" parent="DiceContainer1" instance=ExtResource( 1 )]
+scale = Vector2( 0.5, 0.5 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fanfare-46385.mp3-e49692114035c40352274f76e07b699a.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/fanfare-46385.mp3"
+dest_files=[ "res://.import/fanfare-46385.mp3-e49692114035c40352274f76e07b699a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

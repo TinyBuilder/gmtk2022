@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pencil-29272.mp3-6d3e825f9427880c5d8a3b3611cc0056.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/pencil-29272.mp3"
+dest_files=[ "res://.import/pencil-29272.mp3-6d3e825f9427880c5d8a3b3611cc0056.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

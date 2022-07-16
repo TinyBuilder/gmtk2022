@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lclick-13694.mp3-4f377cdc6f4ab3fa9c2de1ea01e62766.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/lclick-13694.mp3"
+dest_files=[ "res://.import/lclick-13694.mp3-4f377cdc6f4ab3fa9c2de1ea01e62766.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/crowdyayapplause25ppllong-6948.mp3-5ab41754456d0fd6be748e5f19ccf4c7.mp3str"
+
+[deps]
+
+source_file="res://assets/pixabay/crowdyayapplause25ppllong-6948.mp3"
+dest_files=[ "res://.import/crowdyayapplause25ppllong-6948.mp3-5ab41754456d0fd6be748e5f19ccf4c7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
