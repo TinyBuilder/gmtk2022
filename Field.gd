@@ -48,6 +48,10 @@ func change_turn():
 		$Player1.play()
 
 func init_game():
+	$Victory1/AnimationPlayer.play("RESET")
+	$Victory2/AnimationPlayer.play("RESET")
+	$Draw/AnimationPlayer.play("RESET")
+
 	is_starting = true
 	var clear_cells = false
 	var clear_castles = false
@@ -140,6 +144,7 @@ func fill_cell(cell):
 		is_finished = true
 		$Player1.animation = "defeat"
 		$Player2.animation = "defeat"
+		$Draw/AnimationPlayer.play("New Anim")
 
 
 func get_adjacent(cell):
@@ -217,9 +222,11 @@ func flood_fill(start):
 		if winner == 1:
 			$Player1.animation = "victory"
 			$Player2.animation = "defeat"
+			$Victory1/AnimationPlayer.play("New Anim")
 		elif winner == 2:
 			$Player1.animation = "defeat"
 			$Player2.animation = "victory"
+			$Victory2/AnimationPlayer.play("New Anim")
 
 
 	for cardinal in get_cardinals(start):
