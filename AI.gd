@@ -301,17 +301,18 @@ func _process(_delta):
 				# var x = Global.rng.randi_range(0, board_width - 1)
 				# var y = Global.rng.randi_range(0, board_height - 1)
 
-				# while board_state[x][y] != 0:
-				# 	x = Global.rng.randi_range(0, board_width - 1)
-				# 	y = Global.rng.randi_range(0, board_height - 1)
-
 				var i = 0
 				var x = ai_priority[i][0]
 				var y = ai_priority[i][1]
-				while board_state[x][y] != 0:
+				while board_state[x][y] != 0 and i < ai_priority.size() - 1:
 					i += 1
 					x = ai_priority[i][0]
 					y = ai_priority[i][0]
+				
+				if i >= ai_priority.size():
+					while board_state[x][y] != 0:
+						x = Global.rng.randi_range(0, board_width - 1)
+						y = Global.rng.randi_range(0, board_height - 1)
 
 				make_move(Vector2(x, y))
 
