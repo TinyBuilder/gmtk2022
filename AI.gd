@@ -298,22 +298,24 @@ func _process(_delta):
 				dice_roll()
 
 			if move_step == 1:
-				# var x = Global.rng.randi_range(0, board_width - 1)
-				# var y = Global.rng.randi_range(0, board_height - 1)
+				var x = Global.rng.randi_range(0, board_width - 1)
+				var y = Global.rng.randi_range(0, board_height - 1)
 
-				var i = 0
-				var x = ai_priority[i][0]
-				var y = ai_priority[i][1]
-				while board_state[x][y] != 0 and i < ai_priority.size() - 1:
-					i += 1
-					x = ai_priority[i][0]
-					y = ai_priority[i][0]
+				# var i = 0
+				# var x = ai_priority[i][0]
+				# var y = ai_priority[i][1]
+				# while board_state[x][y] != 0 and i < ai_priority.size() - 1:
+				# 	i += 1
+				# 	x = ai_priority[i][0]
+				# 	y = ai_priority[i][0]
 				
-				if i >= ai_priority.size():
-					while board_state[x][y] != 0:
-						x = Global.rng.randi_range(0, board_width - 1)
-						y = Global.rng.randi_range(0, board_height - 1)
+				# if i >= ai_priority.size():
+				while board_state[x][y] != 0:
+					x = Global.rng.randi_range(0, board_width - 1)
+					y = Global.rng.randi_range(0, board_height - 1)
 
+				print("AI move: ",x," ",y)
+				
 				make_move(Vector2(x, y))
 
 			if move_step == 2:
