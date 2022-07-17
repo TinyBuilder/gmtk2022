@@ -41,11 +41,17 @@ func change_turn():
 		$Player1.stop()
 		$Player1.frame = 0
 		$Player2.play()
+		$Turn1.hide()
+		$Turn2.show()
 	elif turn == 2:
 		turn = 1
 		$Player2.stop()
 		$Player2.frame = 0
 		$Player1.play()
+		$Turn1.show()
+		$Turn2.hide()
+	
+	$RollIndicator.show()
 
 func init_game():
 	$Victory1/AnimationPlayer.play("RESET")
@@ -298,6 +304,7 @@ func _input(event):
 
 		if not is_rolling and move_step == 0 and not is_starting and not is_finished:
 			# print("click")
+			$RollIndicator.hide()
 			dice_roll()
 
 

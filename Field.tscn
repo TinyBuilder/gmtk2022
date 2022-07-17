@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://assets/32x32/Board_tile_set.png" type="Texture" id=1]
 [ext_resource path="res://Field.gd" type="Script" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://Music & SFX/Game_StartSFX.mp3" type="AudioStream" id=13]
 [ext_resource path="res://Music & SFX/Castle_Taken_SFX.mp3" type="AudioStream" id=14]
 [ext_resource path="res://Music & SFX/Player_Wins_SFX.mp3" type="AudioStream" id=15]
+[ext_resource path="res://assets/Player_1_turn_text.png" type="Texture" id=16]
+[ext_resource path="res://assets/Player_2_turn_text.png" type="Texture" id=17]
+[ext_resource path="res://assets/clicktoroll.png" type="Texture" id=18]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Board_tile_set.png 0"
@@ -52,15 +55,15 @@ flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 704, 0, 352, 384 )
 
-[sub_resource type="AtlasTexture" id=13]
-flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 352, 384 )
-
 [sub_resource type="AtlasTexture" id=14]
 flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1056, 0, 352, 384 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 352, 384 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
@@ -69,14 +72,14 @@ animations = [ {
 "name": "default",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 13 ) ],
-"loop": true,
-"name": "victory",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 14 ) ],
 "loop": true,
 "name": "defeat",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ) ],
+"loop": true,
+"name": "victory",
 "speed": 5.0
 } ]
 
@@ -90,15 +93,15 @@ flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 704, 384, 352, 384 )
 
-[sub_resource type="AtlasTexture" id=17]
-flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 0, 384, 352, 384 )
-
 [sub_resource type="AtlasTexture" id=18]
 flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1056, 384, 352, 384 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 384, 352, 384 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
@@ -107,14 +110,14 @@ animations = [ {
 "name": "default",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 17 ) ],
-"loop": true,
-"name": "victory",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 18 ) ],
 "loop": true,
 "name": "defeat",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ) ],
+"loop": true,
+"name": "victory",
 "speed": 5.0
 } ]
 
@@ -377,10 +380,12 @@ texture = ExtResource( 6 )
 
 [node name="Player1" type="AnimatedSprite" parent="."]
 position = Vector2( -96, 329 )
+z_index = 5
 frames = SubResource( 7 )
 
 [node name="Player2" type="AnimatedSprite" parent="."]
 position = Vector2( 576, 329 )
+z_index = 5
 frames = SubResource( 10 )
 
 [node name="Victory1" type="Sprite" parent="."]
@@ -435,6 +440,22 @@ stream = ExtResource( 14 )
 
 [node name="VictorySFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
+
+[node name="Turn1" type="Sprite" parent="."]
+visible = false
+position = Vector2( -145, 0 )
+texture = ExtResource( 16 )
+
+[node name="Turn2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 625, 0 )
+texture = ExtResource( 17 )
+
+[node name="RollIndicator" type="Sprite" parent="."]
+visible = false
+position = Vector2( 240, 240 )
+z_index = 10
+texture = ExtResource( 18 )
 
 [connection signal="timeout" from="RollTimer" to="." method="_on_RollTimer_timeout"]
 [connection signal="hide" from="DiceRoller" to="." method="_on_DiceRoller_hide"]
