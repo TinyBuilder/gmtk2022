@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/Main menu PNG.png" type="Texture" id=1]
 [ext_resource path="res://assets/options.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Music & SFX/Main Menu.mp3" type="AudioStream" id=7]
 [ext_resource path="res://Credits.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Rules.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Music & SFX/RulesSFX.wav" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 120, 18 )
@@ -69,6 +70,9 @@ visible = false
 
 [node name="Rules" parent="." instance=ExtResource( 9 )]
 visible = false
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
 
 [connection signal="input_event" from="Menu option/1Playermode/Button1" to="." method="_on_Button1_input_event"]
 [connection signal="input_event" from="Menu option/2Playermode/Button2" to="." method="_on_Button2_input_event"]
