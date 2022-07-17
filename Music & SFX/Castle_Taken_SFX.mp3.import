@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Castle_Taken_SFX.mp3-4e43dd60f7bdf586a1b846ed7bcbce2
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

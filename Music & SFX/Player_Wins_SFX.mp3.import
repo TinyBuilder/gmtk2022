@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Player_Wins_SFX.mp3-14e662715ce619850b4a7ece85d8d5fe
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

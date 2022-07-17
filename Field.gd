@@ -118,6 +118,7 @@ func init_game():
 
 	$TurnDecider.roll()
 	$RollTimer.start()
+	$StartSFX.play()
 
 
 
@@ -146,6 +147,7 @@ func fill_cell(cell):
 		$Player2.animation = "defeat"
 		$Draw/AnimationPlayer.play("New Anim")
 		$EndTimer.start()
+		$VictorySFX.play()
 
 
 func get_adjacent(cell):
@@ -216,6 +218,7 @@ func flood_fill(start):
 		score[turn-1] += 1	
 		print(score)
 		castles[start.x][start.y].capture(turn)
+		$CaptureSFX.play()
 	
 	if score[turn-1] >= win_threshold:
 		winner = turn
@@ -444,3 +447,13 @@ func _on_Area2D8_input_event(_viewport, event, _shape_idx):
 func _on_EndTimer_timeout():
 	if is_finished:
 		get_tree().change_scene("res://MainMenu.tscn")
+
+
+func _on_CaptureSFX_finished():
+	if winner > 0:
+		$BGM.stop()
+		$VictorySFX.play()
+
+
+func _on_StartSFX_finished():
+	$BGM.play()
