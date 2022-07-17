@@ -14,16 +14,15 @@ extents = Vector2( 120, 18 )
 script = ExtResource( 6 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( -20, 75 )
 
 [node name="MainMenuPng" type="Sprite" parent="Background"]
-position = Vector2( 532, 226 )
+position = Vector2( 512, 300 )
 texture = ExtResource( 1 )
 
 [node name="Menu option" type="Sprite" parent="."]
 
 [node name="1Playermode" type="Sprite" parent="Menu option"]
-position = Vector2( 396, 430 )
+position = Vector2( 375, 430 )
 texture = ExtResource( 5 )
 
 [node name="Button1" type="Area2D" parent="Menu option/1Playermode"]
@@ -32,7 +31,7 @@ texture = ExtResource( 5 )
 shape = SubResource( 1 )
 
 [node name="2Playermode" type="Sprite" parent="Menu option"]
-position = Vector2( 396, 505 )
+position = Vector2( 375, 500 )
 texture = ExtResource( 4 )
 
 [node name="Button2" type="Area2D" parent="Menu option/2Playermode"]
@@ -41,7 +40,7 @@ texture = ExtResource( 4 )
 shape = SubResource( 1 )
 
 [node name="Rules" type="Sprite" parent="Menu option"]
-position = Vector2( 668, 432 )
+position = Vector2( 649, 430 )
 texture = ExtResource( 3 )
 
 [node name="Button3" type="Area2D" parent="Menu option/Rules"]
@@ -50,7 +49,7 @@ texture = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="Options" type="Sprite" parent="Menu option"]
-position = Vector2( 665, 508 )
+position = Vector2( 649, 500 )
 texture = ExtResource( 2 )
 
 [node name="Button4" type="Area2D" parent="Menu option/Options"]
