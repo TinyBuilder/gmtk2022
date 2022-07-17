@@ -18,8 +18,21 @@ func roll( auto = false):
 		automate = true
 
 	is_rolling = true
-	dice1.roll(Global.rng.randi_range(1,6))
-	dice2.roll(Global.rng.randi_range(1,6))
+	var r1 = Global.rng.randi_range(1,6)
+	var r2 = Global.rng.randi_range(1,6)
+	if is_starter and r1 == r2:
+		var mod = Global.rng.randi_range(1,2)
+		match mod:
+			1:
+				r2 -= 1
+				if r2 < 1:
+					r2 = 6
+			2:
+				r2 += 1
+				if r2 > 6:
+					r2 = 1
+	dice1.roll(r1)
+	dice2.roll(r2)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

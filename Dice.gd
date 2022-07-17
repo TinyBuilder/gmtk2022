@@ -16,6 +16,7 @@ func roll(determined_result) :
 	# print("rolling")
 	roll_progress = 1
 	result = determined_result
+	$AudioStreamPlayer.play()
 
 func set_face(determined_result):
 	sprite.frame = determined_result - 1
@@ -52,4 +53,5 @@ func _process(_delta):
 	if roll_progress > 60:
 		roll_progress = 0
 		sprite.frame = result - 1
+		$AudioStreamPlayer.stop()
 		emit_signal("done")

@@ -418,7 +418,7 @@ reset_on_save = false
 anims/RESET = SubResource( 24 )
 
 [node name="EndTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 3.5
 one_shot = true
 
 [node name="Border" type="TileMap" parent="."]
