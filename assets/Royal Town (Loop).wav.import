@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Royal Town (Loop).wav-3eb858015d1dd65b94c61a2e1e36997c.sample"
+
+[deps]
+
+source_file="res://assets/Royal Town (Loop).wav"
+dest_files=[ "res://.import/Royal Town (Loop).wav-3eb858015d1dd65b94c61a2e1e36997c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

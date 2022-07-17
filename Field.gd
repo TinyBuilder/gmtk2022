@@ -6,6 +6,7 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+var score = [0,0]
 var player_dice = 0
 var opponent_dice = 0
 var board_height = 15
@@ -28,18 +29,40 @@ var FilledCell = preload("res://FilledCell.tscn")
 var castles = []
 var fillcount = 0
 
+func init_game():
+	var clear_cells = false
+	var clear_castles = false
+	if cell_fills.size() > 0:
+		clear_cells = true
+	if castles.size() > 0:	
+		clear_castles = true
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+	board_state = []
+	cell_fills = []
+	visited_cells = []
+	castles = []
 	for x in range(board_width):
 		board_state.append([])
-		cell_fills.append([])
 		visited_cells.append([])
-		for _y in range(board_height):
+		if not clear_cells:
+			cell_fills.append([])
+		if not clear_castles:
+			castles.append([])
+		for y in range(board_height):
 			board_state[x].append(0)
-			cell_fills[x].append(null)
 			visited_cells[x].append(false)
-			# $TileMap.set_cellv(Vector2(x,y), 0)
+			if clear_cells:
+				cell_fills[x][y].queue_free()
+				cell_fills[x][y] = null
+			else:
+				cell_fills[x].append(null)
+			
+			if clear_castles:
+				if castles[x][y] != null:
+					castles[x][y].queue_free()
+					castles[x][y] = null
+			else:
+				castles[x].append(null)
 
 	var castle_coords = []
 	var mapn = Global.rng.randi_range(0, 4)
@@ -63,7 +86,16 @@ func _ready():
 		var castle = Castle.instance()
 		add_child(castle)
 		castle.global_position = $TileMap.map_to_world(Vector2(x, y)) + $TileMap.global_position
-		castles.append(castle)
+		castles[x][y] = castle
+	
+	move_step = 0
+	is_rolling = false
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	init_game()
 
 	turn = 1
 
@@ -142,8 +174,12 @@ func flood_fill(start):
 	# self.add_child(t)
 	# t.start()
 	# yield(t, "timeout")
-	
+
 	fill_cell(start)
+
+	if castles[start.x][start.y] != null:
+		score[turn-1] += 1	
+		castles[start.x][start.y].capture(turn)
 
 	for cardinal in get_cardinals(start):
 		if $TileMap.get_cellv(cardinal) < 0:

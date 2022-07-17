@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Mighty and Meek.mp3-408a17596954e5d2d6944578cf7f1fec.mp3str"
+
+[deps]
+
+source_file="res://assets/Mighty and Meek.mp3"
+dest_files=[ "res://.import/Mighty and Meek.mp3-408a17596954e5d2d6944578cf7f1fec.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
