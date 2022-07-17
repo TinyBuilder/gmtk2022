@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Game_StartSFX.mp3-1412187db430af35b17a23311243795a.mp3str"
+
+[deps]
+
+source_file="res://Music & SFX/Game_StartSFX.mp3"
+dest_files=[ "res://.import/Game_StartSFX.mp3-1412187db430af35b17a23311243795a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Castle_Taken_SFX.mp3-4e43dd60f7bdf586a1b846ed7bcbce26.mp3str"
+
+[deps]
+
+source_file="res://Music & SFX/Castle_Taken_SFX.mp3"
+dest_files=[ "res://.import/Castle_Taken_SFX.mp3-4e43dd60f7bdf586a1b846ed7bcbce26.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

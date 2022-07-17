@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/stop.mp3-6c5a95beb4364acefea976eebf4fe274.mp3str"
+
+[deps]
+
+source_file="res://Music & SFX/stop.mp3"
+dest_files=[ "res://.import/stop.mp3-6c5a95beb4364acefea976eebf4fe274.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

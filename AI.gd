@@ -6,7 +6,7 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var score = [0,0]
+var score = [0, 0]
 var player_dice = 0
 var opponent_dice = 0
 var board_height = 15
@@ -33,6 +33,7 @@ var fillcount = 0
 var win_threshold = 8
 var winner = 0
 
+
 func change_turn():
 	$Player1.animation = "default"
 	$Player2.animation = "default"
@@ -47,6 +48,7 @@ func change_turn():
 		$Player2.frame = 0
 		$Player1.play()
 
+
 func init_game():
 	$Victory1/AnimationPlayer.play("RESET")
 	$Victory2/AnimationPlayer.play("RESET")
@@ -57,7 +59,7 @@ func init_game():
 	var clear_castles = false
 	if cell_fills.size() > 0:
 		clear_cells = true
-	if castles.size() > 0:	
+	if castles.size() > 0:
 		clear_castles = true
 
 	board_state = []
@@ -79,7 +81,7 @@ func init_game():
 				cell_fills[x][y] = null
 			else:
 				cell_fills[x].append(null)
-			
+
 			if clear_castles:
 				if castles[x][y] != null:
 					castles[x][y].queue_free()
@@ -112,13 +114,12 @@ func init_game():
 		add_child(castle)
 		castle.global_position = $TileMap.map_to_world(Vector2(x, y)) + $TileMap.global_position
 		castles[x][y] = castle
-	
+
 	move_step = 0
 	is_rolling = false
 
 	$TurnDecider.roll()
 	$RollTimer.start()
-
 
 
 # Called when the node enters the scene tree for the first time.
@@ -202,7 +203,7 @@ func is_enclosed(start):
 
 func flood_fill(start):
 	# print("Flooding ", start)
-	
+
 	# var t = Timer.new()
 	# t.set_wait_time(1)
 	# t.set_one_shot(true)
@@ -213,11 +214,11 @@ func flood_fill(start):
 	fill_cell(start)
 
 	if castles[start.x][start.y] != null:
-		score[turn-1] += 1	
+		score[turn - 1] += 1
 		print(score)
 		castles[start.x][start.y].capture(turn)
-	
-	if score[turn-1] >= win_threshold:
+
+	if score[turn - 1] >= win_threshold:
 		winner = turn
 		is_finished = true
 		if winner == 1:
@@ -228,10 +229,9 @@ func flood_fill(start):
 			$Player1.animation = "defeat"
 			$Player2.animation = "victory"
 			$Victory2/AnimationPlayer.play("New Anim")
-		
+
 		$EndTimer.start()
 		return
-
 
 	for cardinal in get_cardinals(start):
 		if $TileMap.get_cellv(cardinal) < 0:
@@ -248,7 +248,7 @@ func flood_fill(start):
 
 func detect_enclosed_spaces(cell):
 	var neighbours = get_neighbours(cell)
-	
+
 	for neighbour in neighbours:
 		for x in range(board_width):
 			for y in range(board_height):
@@ -265,35 +265,11 @@ func detect_enclosed_spaces(cell):
 func _input(event):
 	if event is InputEventMouseButton:
 		var pos = event.position
-		if event.pressed and move_step == 1:
+		if event.pressed and move_step == 1 and turn == 1:
 			var cell = $TileMap.world_to_map($TileMap.to_local(pos))
-			if $TileMap.get_cellv(cell) < 0 or board_state[cell.x][cell.y] > 0:
-				return
-			$Highlight.hide()
-			var cell_pos = $TileMap.map_to_world(cell) + $TileMap.global_position
-			last_dice_placement = cell
-			$Dice.global_position = cell_pos + Vector2(16, 16)
-			fill_cell(cell)
-			detect_enclosed_spaces(cell)
-			$ArrowContainer.global_position = cell_pos + Vector2(16, 16)
-			$ArrowContainer.show()
-			var directions = get_adjacent(cell)
-			# print("Surrounding cells: ", directions)
-			var valid_directions = 8
-			for i in range(8):
-				# print("Checking ", directions[i], board_state[directions[i].x][directions[i].y])
-				if (
-					$TileMap.get_cellv(directions[i]) < 0
-					or board_state[directions[i].x][directions[i].y] > 2
-				):
-					# print(directions[i], " invalid")
-					valid_directions -= 1
-					$ArrowContainer.get_children()[i].hide()
-			if valid_directions < remaining_paths:
-				remaining_paths = valid_directions
-			move_step = 2
+			make_move(cell)
 
-		if not is_rolling and move_step == 0 and not is_starting and not is_finished:
+		if not is_rolling and move_step == 0 and not is_starting and not is_finished and turn == 1:
 			# print("click")
 			dice_roll()
 
@@ -308,15 +284,63 @@ func _process(_delta):
 	if move_step == 1:
 		$Dice.global_position = cursor_position + Vector2(0, -32)
 
+	if turn == 2:
+		if not is_rolling and not is_starting and not is_finished:
+			if move_step == 0:
+				dice_roll()
+
+			if move_step == 1:
+				var x = Global.rng.randi_range(0,board_width-1)
+				var y = Global.rng.randi_range(0,board_height-1)
+
+				while board_state[x][y] != 0:
+					x = Global.rng.randi_range(0,board_width-1)
+					y = Global.rng.randi_range(0,board_height-1)
+
+				make_move(Vector2(x, y))
+
+			if move_step == 2:
+				for _i in range(remaining_paths):
+					var direction = Global.rng.randi_range(1, 8)
+					while not $ArrowContainer.get_children()[direction - 1].is_visible_in_tree():
+						direction = Global.rng.randi_range(1, 8)
+
+					choose_direction(direction)
+
 
 func dice_roll():
 	is_rolling = true
 	$DiceRoller.show()
-	$DiceRoller.roll()
+	$DiceRoller.roll(turn == 2)
 
 
-func make_move(cell, dice):
-	dice.global_position = $TileMap.map_to_world(cell)
+
+func make_move(cell):
+	if $TileMap.get_cellv(cell) < 0 or board_state[cell.x][cell.y] > 0:
+		return
+	$Highlight.hide()
+	var cell_pos = $TileMap.map_to_world(cell) + $TileMap.global_position
+	last_dice_placement = cell
+	$Dice.global_position = cell_pos + Vector2(16, 16)
+	fill_cell(cell)
+	detect_enclosed_spaces(cell)
+	$ArrowContainer.global_position = cell_pos + Vector2(16, 16)
+	$ArrowContainer.show()
+	var directions = get_adjacent(cell)
+	# print("Surrounding cells: ", directions)
+	var valid_directions = 8
+	for i in range(8):
+		# print("Checking ", directions[i], board_state[directions[i].x][directions[i].y])
+		if (
+			$TileMap.get_cellv(directions[i]) < 0
+			or board_state[directions[i].x][directions[i].y] > 2
+		):
+			# print(directions[i], " invalid")
+			valid_directions -= 1
+			$ArrowContainer.get_children()[i].hide()
+	if valid_directions < remaining_paths:
+		remaining_paths = valid_directions
+	move_step = 2
 
 
 func _on_RollTimer_timeout():
@@ -331,13 +355,12 @@ func _on_RollTimer_timeout():
 			turn = 1
 			change_turn()
 		else:
-			turn = Global.rng.randi_range(1,2)
+			turn = Global.rng.randi_range(1, 2)
 			change_turn()
-		
-		$TurnDecider.hide()
-		
-		is_starting = false
 
+		$TurnDecider.hide()
+
+		is_starting = false
 
 
 func _on_DiceRoller_hide():
@@ -355,12 +378,7 @@ func _on_DiceRoller_hide():
 	is_rolling = false
 
 
-func choose_direction(event, direction):
-	if not event is InputEventMouseButton:
-		return
-	if not event.pressed:
-		return
-
+func choose_direction(direction):
 	for i in range(1, 8 - $DiceRoller.result):
 		# print(i)
 		var cell
@@ -403,42 +421,74 @@ func choose_direction(event, direction):
 			change_turn()
 
 		move_step = 0
-	
+
 	if is_finished:
 		# display victory scene
 		pass
 
 
 func _on_Area2D_input_event(_viewport, event, _shape_idx):
-	choose_direction(event, 1)
+	if not event is InputEventMouseButton:
+		return
+	if not event.pressed:
+		return
+	choose_direction(1)
 
 
 func _on_Area2D2_input_event(_viewport, event, _shape_idx):
-	choose_direction(event, 2)
+	if not event is InputEventMouseButton:
+		return
+	if not event.pressed:
+		return
+	choose_direction(2)
 
 
 func _on_Area2D3_input_event(_viewport, event, _shape_idx):
-	choose_direction(event, 3)
+	if not event is InputEventMouseButton:
+		return
+	if not event.pressed:
+		return
+	choose_direction(3)
 
 
 func _on_Area2D4_input_event(_viewport, event, _shape_idx):
-	choose_direction(event, 4)
+	if not event is InputEventMouseButton:
+		return
+	if not event.pressed:
+		return
+	choose_direction(4)
 
 
 func _on_Area2D5_input_event(_viewport, event, _shape_idx):
-	choose_direction(event, 5)
+	if not event is InputEventMouseButton:
+		return
+	if not event.pressed:
+		return
+	choose_direction(5)
 
 
 func _on_Area2D6_input_event(_viewport, event, _shape_idx):
-	choose_direction(event, 6)
+	if not event is InputEventMouseButton:
+		return
+	if not event.pressed:
+		return
+	choose_direction(6)
 
 
 func _on_Area2D7_input_event(_viewport, event, _shape_idx):
-	choose_direction(event, 7)
+	if not event is InputEventMouseButton:
+		return
+	if not event.pressed:
+		return
+	choose_direction(7)
 
 
 func _on_Area2D8_input_event(_viewport, event, _shape_idx):
-	choose_direction(event, 8)
+	if not event is InputEventMouseButton:
+		return
+	if not event.pressed:
+		return
+	choose_direction(8)
 
 
 func _on_EndTimer_timeout():

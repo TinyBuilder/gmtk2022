@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/32x32/Board_tile_set.png" type="Texture" id=1]
-[ext_resource path="res://Field.gd" type="Script" id=2]
+[ext_resource path="res://AI.gd" type="Script" id=2]
 [ext_resource path="res://DiceRoller.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Dice.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/32x32/arrow.png" type="Texture" id=5]

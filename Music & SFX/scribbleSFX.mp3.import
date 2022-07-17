@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/scribbleSFX.mp3-a01282690339274e957888f2f51c4ef2.mp3str"
+
+[deps]
+
+source_file="res://Music & SFX/scribbleSFX.mp3"
+dest_files=[ "res://.import/scribbleSFX.mp3-a01282690339274e957888f2f51c4ef2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -9,10 +9,14 @@ export var is_starter = false
 var dice1_done = false
 var dice2_done = false
 var result = 0
+var automate = false
 onready var dice1 = $DiceContainer1/CollisionShape2D/Dice1
 onready var dice2 = $DiceContainer2/CollisionShape2D/Dice2
 
-func roll():
+func roll( auto = false):
+	if auto:
+		automate = true
+
 	is_rolling = true
 	dice1.roll(Global.rng.randi_range(1,6))
 	dice2.roll(Global.rng.randi_range(1,6))
@@ -24,11 +28,19 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(_delta):
+	if automate and not is_rolling:
+		var pick = Global.rng.randi_range(1,2)
+		if pick == 1:
+			result = dice1.result
+		else:
+			result = dice2.result
+		
+		automate = false
+		hide()
 
 func _on_DiceContainer1_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
-	if is_rolling or is_starter:
+	if is_rolling or is_starter or automate:
 		return
 	
 	if event is InputEventMouseButton:
@@ -37,7 +49,7 @@ func _on_DiceContainer1_input_event(_viewport:Node, event:InputEvent, _shape_idx
 			hide()
 
 func _on_DiceContainer2_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
-	if is_rolling:
+	if is_rolling or is_starter or automate:
 		return
 
 	if event is InputEventMouseButton:

@@ -19,7 +19,7 @@ func _ready():
 func _on_Button1_input_event(viewport:Node, event:InputEvent, shape_idx:int):
 	if event is InputEventMouseButton:
 		if event.pressed:
-			get_tree().change_scene("res://Field.tscn")
+			get_tree().change_scene("res://AI.tscn")
 
 func _on_Button2_input_event(viewport:Node, event:InputEvent, shape_idx:int):
 	if event is InputEventMouseButton:
