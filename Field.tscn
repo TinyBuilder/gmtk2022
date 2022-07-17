@@ -277,6 +277,8 @@ z_as_relative = false
 
 [node name="ArrowContainer" type="Node2D" parent="."]
 visible = false
+z_index = 9
+z_as_relative = false
 
 [node name="Area2D" type="Area2D" parent="ArrowContainer"]
 position = Vector2( 0, -32 )
@@ -381,15 +383,18 @@ texture = ExtResource( 6 )
 [node name="Player1" type="AnimatedSprite" parent="."]
 position = Vector2( -96, 329 )
 z_index = 5
+z_as_relative = false
 frames = SubResource( 7 )
 
 [node name="Player2" type="AnimatedSprite" parent="."]
 position = Vector2( 576, 329 )
 z_index = 5
+z_as_relative = false
 frames = SubResource( 10 )
 
 [node name="Victory1" type="Sprite" parent="."]
 z_index = 10
+z_as_relative = false
 texture = ExtResource( 8 )
 offset = Vector2( 240, -120 )
 
@@ -400,6 +405,7 @@ anims/RESET = SubResource( 21 )
 
 [node name="Victory2" type="Sprite" parent="."]
 z_index = 10
+z_as_relative = false
 texture = ExtResource( 9 )
 offset = Vector2( 240, -120 )
 
@@ -409,6 +415,8 @@ reset_on_save = false
 anims/RESET = SubResource( 22 )
 
 [node name="Draw" type="Sprite" parent="."]
+z_index = 10
+z_as_relative = false
 texture = ExtResource( 10 )
 offset = Vector2( 240, -120 )
 

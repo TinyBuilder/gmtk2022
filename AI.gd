@@ -110,6 +110,7 @@ func init_game():
 		castle_coords = [[2, 5], [7, 5], [12, 5], [2, 9], [7, 9], [12, 9]]
 
 	win_threshold = floor(castle_coords.size() / 2) + 1
+	fillcount = castle_coords.size()
 
 	for coord in castle_coords:
 		var x = coord[0]
@@ -142,7 +143,8 @@ func fill_cell(cell):
 		cell_fills[cell.x][cell.y] = FilledCell.instance()
 		cell_fills[cell.x][cell.y].global_position = ($TileMap.map_to_world(cell))
 		add_child(cell_fills[cell.x][cell.y])
-		fillcount += 1
+		if castles[cell.x][cell.y] == null:
+			fillcount += 1
 
 	cell_fills[cell.x][cell.y].color(turn)
 
@@ -257,6 +259,8 @@ func flood_fill(start):
 
 
 func detect_enclosed_spaces(cell):
+	if is_finished:
+		return
 	var neighbours = get_neighbours(cell)
 
 	for neighbour in neighbours:

@@ -121,6 +121,7 @@ func init_game():
 	
 	move_step = 0
 	is_rolling = false
+	fillcount = castle_coords.size()
 
 	$TurnDecider.roll()
 	$RollTimer.start()
@@ -142,7 +143,8 @@ func fill_cell(cell):
 		cell_fills[cell.x][cell.y] = FilledCell.instance()
 		cell_fills[cell.x][cell.y].global_position = ($TileMap.map_to_world(cell))
 		add_child(cell_fills[cell.x][cell.y])
-		fillcount += 1
+		if castles[cell.x][cell.y] == null:
+			fillcount += 1
 
 	cell_fills[cell.x][cell.y].color(turn)
 
