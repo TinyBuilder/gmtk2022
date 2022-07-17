@@ -5,6 +5,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 var is_rolling = false
+export var is_starter = false
 var dice1_done = false
 var dice2_done = false
 var result = 0
@@ -18,14 +19,16 @@ func roll():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	if is_starter:
+		roll()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
 func _on_DiceContainer1_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
-	if is_rolling:
+	if is_rolling or is_starter:
 		return
 	
 	if event is InputEventMouseButton:

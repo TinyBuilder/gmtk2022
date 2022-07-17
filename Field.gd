@@ -19,6 +19,8 @@ var remaining_paths = 0
 var turn = 0
 var screen_center = Vector2(0, 0)
 var is_rolling = false
+var is_starting = true
+var is_finished = false
 var active_dice
 var move_step = 0
 var last_dice_placement
@@ -28,8 +30,25 @@ var Castle = preload("res://Castle.tscn")
 var FilledCell = preload("res://FilledCell.tscn")
 var castles = []
 var fillcount = 0
+var win_threshold = 8
+var winner = 0
+
+func change_turn():
+	$Player1.animation = "default"
+	$Player2.animation = "default"
+	if turn == 1:
+		turn = 2
+		$Player1.stop()
+		$Player1.frame = 0
+		$Player2.play()
+	elif turn == 2:
+		turn = 1
+		$Player2.stop()
+		$Player2.frame = 0
+		$Player1.play()
 
 func init_game():
+	is_starting = true
 	var clear_cells = false
 	var clear_castles = false
 	if cell_fills.size() > 0:
@@ -79,6 +98,8 @@ func init_game():
 	else:
 		castle_coords = [[2, 5], [7, 5], [12, 5], [2, 9], [7, 9], [12, 9]]
 
+	win_threshold = floor(castle_coords.size() / 2) + 1
+
 	for coord in castle_coords:
 		var x = coord[0]
 		var y = coord[1]
@@ -91,13 +112,14 @@ func init_game():
 	move_step = 0
 	is_rolling = false
 
+	$TurnDecider.roll()
+	$RollTimer.start()
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_game()
-
-	turn = 1
 
 
 func fill_cell(cell):
@@ -109,8 +131,15 @@ func fill_cell(cell):
 		cell_fills[cell.x][cell.y] = FilledCell.instance()
 		cell_fills[cell.x][cell.y].global_position = ($TileMap.map_to_world(cell))
 		add_child(cell_fills[cell.x][cell.y])
+		fillcount += 1
 
 	cell_fills[cell.x][cell.y].color(turn)
+
+	if fillcount >= (board_height * board_width):
+		winner = 0
+		is_finished = true
+		$Player1.animation = "defeat"
+		$Player2.animation = "defeat"
 
 
 func get_adjacent(cell):
@@ -166,7 +195,7 @@ func is_enclosed(start):
 
 
 func flood_fill(start):
-	print("Flooding ", start)
+	# print("Flooding ", start)
 	
 	# var t = Timer.new()
 	# t.set_wait_time(1)
@@ -179,7 +208,19 @@ func flood_fill(start):
 
 	if castles[start.x][start.y] != null:
 		score[turn-1] += 1	
+		print(score)
 		castles[start.x][start.y].capture(turn)
+	
+	if score[turn-1] >= win_threshold:
+		winner = turn
+		is_finished = true
+		if winner == 1:
+			$Player1.animation = "victory"
+			$Player2.animation = "defeat"
+		elif winner == 2:
+			$Player1.animation = "defeat"
+			$Player2.animation = "victory"
+
 
 	for cardinal in get_cardinals(start):
 		if $TileMap.get_cellv(cardinal) < 0:
@@ -206,7 +247,7 @@ func detect_enclosed_spaces(cell):
 				visited_cells[x][y] = visited
 		if not visited_cells[neighbour.x][neighbour.y]:
 			if is_enclosed(neighbour):
-				print("Enclosure found at: ", neighbour)
+				# print("Enclosure found at: ", neighbour)
 				flood_fill(neighbour)
 
 
@@ -226,7 +267,7 @@ func _input(event):
 			$ArrowContainer.global_position = cell_pos + Vector2(16, 16)
 			$ArrowContainer.show()
 			var directions = get_adjacent(cell)
-			print("Surrounding cells: ", directions)
+			# print("Surrounding cells: ", directions)
 			var valid_directions = 8
 			for i in range(8):
 				# print("Checking ", directions[i], board_state[directions[i].x][directions[i].y])
@@ -234,14 +275,14 @@ func _input(event):
 					$TileMap.get_cellv(directions[i]) < 0
 					or board_state[directions[i].x][directions[i].y] > 2
 				):
-					print(directions[i], " invalid")
+					# print(directions[i], " invalid")
 					valid_directions -= 1
 					$ArrowContainer.get_children()[i].hide()
 			if valid_directions < remaining_paths:
 				remaining_paths = valid_directions
 			move_step = 2
 
-		if not is_rolling and move_step == 0:
+		if not is_rolling and move_step == 0 and not is_starting and not is_finished:
 			# print("click")
 			dice_roll()
 
@@ -268,11 +309,27 @@ func make_move(cell, dice):
 
 
 func _on_RollTimer_timeout():
-	is_rolling = false
+	if is_starting:
+		var dice1 = $TurnDecider/DiceContainer1/CollisionShape2D/Dice1
+		var dice2 = $TurnDecider/DiceContainer2/CollisionShape2D/Dice2
+
+		if dice1.result > dice2.result:
+			turn = 2
+			change_turn()
+		elif dice2.result > dice1.result:
+			turn = 1
+			change_turn()
+		else:
+			turn = Global.rng.randi_range(1,2)
+			change_turn()
+		
+		$TurnDecider.hide()
+		
+		is_starting = false
 
 
 func _on_DiceRoller_hide():
-	print("Selected dice: ", $DiceRoller.result)
+	# print("Selected dice: ", $DiceRoller.result)
 	if turn == 1:
 		player_dice = $DiceRoller.result
 
@@ -330,12 +387,13 @@ func choose_direction(event, direction):
 		$FillTimer.start()
 		yield($FillTimer, "timeout")
 
-		if turn == 1:
-			turn = 2
-		else:
-			turn = 1
+		change_turn()
 
 		move_step = 0
+	
+	if is_finished:
+		# display victory scene
+		pass
 
 
 func _on_Area2D_input_event(_viewport, event, _shape_idx):
