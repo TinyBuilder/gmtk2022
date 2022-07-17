@@ -314,8 +314,6 @@ func _process(_delta):
 					x = Global.rng.randi_range(0, board_width - 1)
 					y = Global.rng.randi_range(0, board_height - 1)
 
-				print("AI move: ",x," ",y)
-				
 				make_move(Vector2(x, y))
 
 			if move_step == 2:
