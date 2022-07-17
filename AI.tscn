@@ -380,10 +380,12 @@ texture = ExtResource( 6 )
 
 [node name="Player1" type="AnimatedSprite" parent="."]
 position = Vector2( -96, 329 )
+z_index = 1
 frames = SubResource( 7 )
 
 [node name="Player2" type="AnimatedSprite" parent="."]
 position = Vector2( 576, 329 )
+z_index = 1
 frames = SubResource( 10 )
 
 [node name="Victory1" type="Sprite" parent="."]

@@ -219,6 +219,8 @@ func flood_fill(start):
 	# yield(t, "timeout")
 
 	fill_cell(start)
+	if is_finished:
+		return
 
 	if castles[start.x][start.y] != null:
 		score[turn - 1] += 1
@@ -339,6 +341,8 @@ func make_move(cell):
 	last_dice_placement = cell
 	$Dice.global_position = cell_pos + Vector2(16, 16)
 	fill_cell(cell)
+	if is_finished:
+		return
 	detect_enclosed_spaces(cell)
 	$ArrowContainer.global_position = cell_pos + Vector2(16, 16)
 	$ArrowContainer.show()
