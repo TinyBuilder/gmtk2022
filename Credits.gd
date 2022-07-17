@@ -4,7 +4,7 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-signal close_rules
+signal back_to_main
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,7 +17,7 @@ func _ready():
 #	pass
 
 
-func _on_Area2D_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
+func _on_Area2D_input_event(viewport:Node, event:InputEvent, shape_idx:int):
 	if event is InputEventMouseButton:
-		if event.pressed:	
-			emit_signal("close_rules")
+		if event.pressed:
+			emit_signal("back_to_main")

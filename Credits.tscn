@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Credits.png" type="Texture" id=1]
 [ext_resource path="res://assets/GoBack.png" type="Texture" id=2]
+[ext_resource path="res://Credits.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 60 )
 
 [node name="Credits" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Credits" type="Sprite" parent="."]
 position = Vector2( 512, 300 )
@@ -20,3 +22,5 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoBack/Area2D"]
 shape = SubResource( 1 )
+
+[connection signal="input_event" from="GoBack/Area2D" to="." method="_on_Area2D_input_event"]

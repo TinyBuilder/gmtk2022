@@ -29,9 +29,15 @@ func _on_Button2_input_event(viewport:Node, event:InputEvent, shape_idx:int):
 func _on_Button3_input_event(viewport:Node, event:InputEvent, shape_idx:int):
 	if event is InputEventMouseButton:
 		if event.pressed:
-			get_tree().change_scene("res://Rules.tscn")
+			$Rules.show()
 
 func _on_Button4_input_event(viewport:Node, event:InputEvent, shape_idx:int):
 	if event is InputEventMouseButton:
 		if event.pressed:
-			get_tree().change_scene("res://Rules.tscn")
+			$Credits.show()
+
+func _on_Credits_back_to_main():
+	$Credits.hide()
+
+func _on_Rules_close_rules():
+	$Rules.hide()
